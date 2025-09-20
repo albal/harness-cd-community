@@ -121,3 +121,50 @@ kubectl delete namespace harness
 ## Advanced Configuration
 ### How to deploy the Harness to a separate environment
 You simply need to set the `harness_host` configuration parameter. This should be the IP address or hostname of the machine where you are deploying Harness. You **cannot** use `localhost` for this parameter. Open values.yaml in your editor and update the `harness_host` parameter.
+
+### Using Nginx Ingress Controller
+Instead of port-forwarding, you can use an nginx ingress controller to expose the Harness UI. This provides a more production-ready setup with proper TLS termination.
+
+#### Prerequisites
+- Nginx ingress controller installed in your cluster
+- TLS certificate (optional, for HTTPS)
+
+#### Enable Ingress
+```shell
+# Basic ingress setup (uses harness_host from values.yaml)
+helm install harness ./harness --set ingress.enabled=true --create-namespace --namespace harness
+
+# Custom hostname
+helm install harness ./harness --set ingress.enabled=true --set harness_host=harness.example.com --create-namespace --namespace harness
+```
+
+#### TLS Configuration
+The ingress is configured to use a TLS secret named `harness-tls` by default. Create this secret with your certificate:
+
+```shell
+kubectl create secret tls harness-tls \
+  --cert=path/to/tls.crt \
+  --key=path/to/tls.key \
+  --namespace harness
+```
+
+#### Advanced Ingress Configuration
+You can customize the ingress by modifying the `ingress` section in values.yaml:
+
+```yaml
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "2g"
+  hosts:
+    - host: harness.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: harness-tls
+      hosts:
+        - harness.example.com
+```
