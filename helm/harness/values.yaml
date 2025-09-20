@@ -1,6 +1,6 @@
 # See readme for details on setting harness_host
-harness_host: ""
-listen_port: "7143"
+harness_host: "harness.lab.tsew.net"
+listen_port: "443"
 
 # Add custom annotations/labels for deployments
 deployment:
