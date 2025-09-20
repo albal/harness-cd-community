@@ -1,5 +1,14 @@
 1. To access the application run these commands:
 
+{{- if .Values.ingress.enabled }}
+   a. Wait for manager to start
+        kubectl wait --namespace {{ .Release.Namespace }} --timeout 900s --selector app=proxy --for condition=Ready pods
+
+   b. Open in browser (using ingress)
+        https://{{ .Values.harness_host }}/#/signup
+
+   Note: Make sure your nginx ingress controller is installed and the TLS secret '{{ (index .Values.ingress.tls 0).secretName | default "harness-tls" }}' is configured with a valid certificate for {{ .Values.harness_host }}
+{{- else }}
    a. Wait for manager to start
         kubectl wait --namespace {{ .Release.Namespace }} --timeout 900s --selector app=proxy --for condition=Ready pods
 
@@ -8,3 +17,6 @@
 
    c. Open
         http://{{ .Values.harness_host | default "localhost" }}:{{ .Values.listen_port }}/#/signup
+
+   Tip: To use ingress instead of port-forwarding, set ingress.enabled=true and configure your ingress controller
+{{- end }}
