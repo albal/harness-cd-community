@@ -11,6 +11,7 @@ ingress:
     # nginx.ingress.kubernetes.io/proxy-body-size: "2g"
     # nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     # nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
     - host: ""  # Uses harness_host from above if not specified
       paths:
