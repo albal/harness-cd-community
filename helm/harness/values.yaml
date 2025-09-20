@@ -4,7 +4,7 @@ listen_port: "443"
 
 # Ingress configuration
 ingress:
-  enabled: false
+  enabled: true
   className: "nginx"
   annotations:
     # nginx.ingress.kubernetes.io/ssl-redirect: "true"
