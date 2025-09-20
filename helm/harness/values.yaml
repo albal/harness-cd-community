@@ -2,6 +2,25 @@
 harness_host: "harness.lab.tsew.net"
 listen_port: "443"
 
+# Ingress configuration
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations:
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/proxy-body-size: "2g"
+    # nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    # nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+  hosts:
+    - host: ""  # Uses harness_host from above if not specified
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: harness-tls
+      hosts:
+        - ""  # Uses harness_host from above if not specified
+
 # Add custom annotations/labels for deployments
 deployment:
   annotations:
