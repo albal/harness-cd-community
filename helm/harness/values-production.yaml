@@ -169,6 +169,7 @@ redis:
     requests:
       memory: 128Mi
       cpu: 200m
+      storage: 5Gi
 
 mongo:
   resources:
