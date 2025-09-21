@@ -133,6 +133,15 @@ data:
                 proxy_pass http://ng_manager_service/;
             }
 
+            location /v1/ {
+                # WebSocket support (nginx 1.4)
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+                client_max_body_size 2G;
+                proxy_pass http://ng_manager_service/v1/;
+            }
+
             location /pipeline/ {
                 # WebSocket support (nginx 1.4)
                 proxy_http_version 1.1;
