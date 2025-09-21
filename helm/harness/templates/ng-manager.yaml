@@ -68,6 +68,10 @@ data:
   # Additional LOCAL encryption settings
   LOCAL_ENCRYPTOR_ENABLED: 'true'
   ENCRYPTOR_TYPE: LOCAL
+  # Secret Manager configuration
+  SECRET_MANAGER_TYPE: LOCAL
+  SECRET_MANAGER_ID: localSecretManager
+  LOCAL_SECRET_MANAGER_ID: localSecretManager
 
 ---
 
