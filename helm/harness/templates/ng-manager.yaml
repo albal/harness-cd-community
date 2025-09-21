@@ -58,6 +58,8 @@ data:
   SHOULD_CONFIGURE_WITH_PMS: 'true'
   USE_REDIS_FOR_SDK_RESPONSE_EVENTS: 'true'
   WEBHOOK_EVENT_PROCESSING_SERVICE_THREAD_SIZE: '{{ .Values.ng_manager.config.webhook_event_processing_service_thread_size | default "2" }}'
+  # Platform service configuration
+  PLATFORM_SERVICE_BASE_URL: http://platform-service:9005/
   # Encryption configuration for LOCAL encryptor
   HARNESS_SECRET_MANAGER_TYPE: LOCAL
   HARNESS_ENCRYPTOR_LOCAL_MASTER_KEY: harness-local-master-key-{{ .Values.versions.manager | default "default" }}
