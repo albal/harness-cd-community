@@ -143,8 +143,8 @@ spec:
             runAsUser: 101
       containers:
       - name: ng-manager
-        image: albal/ng-manager:local-encryption-fix
-        imagePullPolicy: Always
+        image: harness/ng-manager-signed:{{ .Values.versions.manager }}
+        imagePullPolicy: IfNotPresent
         securityContext:
           runAsUser: 65534
           runAsNonRoot: true
