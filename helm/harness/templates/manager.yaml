@@ -89,7 +89,7 @@ data:
   LOGGERS: org.reflections.Reflections=ERROR
   LOGGING_LEVEL: WARN
   {{ if .Values.harness_host }}
-  LOG_STREAMING_SERVICE_BASEURL: http://{{ .Values.harness_host }}:{{ .Values.listen_port }}/log-service/
+  LOG_STREAMING_SERVICE_BASEURL: https://{{ .Values.harness_host }}/log-service/
   {{ else }}
   LOG_STREAMING_SERVICE_BASEURL: http://proxy/log-service/
   {{ end }}
