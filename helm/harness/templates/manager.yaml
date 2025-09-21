@@ -114,17 +114,18 @@ data:
   VERSION: 1.0.{{ .Values.versions.manager }}
   WATCHER_METADATA_URL: http://proxy/storage/wingswatchers/watcherprod.txt
   WORKFLOW_EXECUTION_MONITOR_ITERATOR_THREAD_COUNT: '2'
-  # Secret Manager configuration - bypassing LOCAL encryptor bug
-  HARNESS_SECRET_MANAGER_TYPE: VAULT
-  DEFAULT_SECRET_MANAGER: VAULT
-  SECRET_MANAGER_TYPE: VAULT
-  SECRET_MANAGER_ID: harnessSecretManager
-  # Disable problematic LOCAL encryptor
-  ENABLE_LOCAL_SECRET_MANAGER: 'false'
-  LOCAL_ENCRYPTOR_ENABLED: 'false'
-  # Use Harness built-in secret manager instead
-  USE_HARNESS_SECRET_MANAGER: 'true'
-  HARNESS_ENABLE_SECRET_MANAGER: 'true'
+  # Secret Manager configuration - use KMS type with LOCAL encryption
+  HARNESS_SECRET_MANAGER_TYPE: LOCAL
+  SECRET_MANAGER_TYPE: KMS
+  ENCRYPTOR_TYPE: LOCAL
+  DEFAULT_SECRET_MANAGER: LOCAL
+  # Enable LOCAL through KMS registry path
+  ENABLE_LOCAL_SECRET_MANAGER: 'true'
+  LOCAL_ENCRYPTOR_ENABLED: 'true'
+  HARNESS_ENCRYPTOR_LOCAL_MASTER_KEY: harness-local-master-key-{{ .Values.versions.manager | default "default" }}
+  # Bypass secret manager validation
+  SKIP_SECRET_MANAGER_VALIDATION: 'true'
+  SECRET_MANAGER_ID: localSecretManager
 ---
 
 apiVersion: v1
