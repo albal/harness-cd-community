@@ -59,10 +59,10 @@ data:
   USE_REDIS_FOR_SDK_RESPONSE_EVENTS: 'true'
   WEBHOOK_EVENT_PROCESSING_SERVICE_THREAD_SIZE: '{{ .Values.ng_manager.config.webhook_event_processing_service_thread_size | default "2" }}'
   # Encryption configuration for LOCAL encryptor
-  ENCRYPTION_TYPE: LOCAL
-  LOCAL_ENCRYPTOR_MASTER_KEY: harness-master-key-{{ .Values.versions.manager | default "default" }}
-  KMS_BASE_URL: http://localhost:8080
-  SECRET_MANAGER_TYPE: LOCAL
+  HARNESS_SECRET_MANAGER_TYPE: LOCAL
+  HARNESS_ENCRYPTOR_LOCAL_MASTER_KEY: harness-local-master-key-{{ .Values.versions.manager | default "default" }}
+  ENABLE_LOCAL_SECRET_MANAGER: 'true'
+  DEFAULT_SECRET_MANAGER: LOCAL
 
 ---
 
