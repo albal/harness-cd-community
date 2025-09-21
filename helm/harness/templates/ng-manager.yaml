@@ -60,9 +60,9 @@ data:
   WEBHOOK_EVENT_PROCESSING_SERVICE_THREAD_SIZE: '{{ .Values.ng_manager.config.webhook_event_processing_service_thread_size | default "2" }}'
   # Platform service configuration
   PLATFORM_SERVICE_BASE_URL: http://platform-service:9005/
-  # Secret Manager configuration - use KMS type with LOCAL encryption
+  # Secret Manager configuration - use LOCAL encryption consistently
   HARNESS_SECRET_MANAGER_TYPE: LOCAL
-  SECRET_MANAGER_TYPE: KMS
+  SECRET_MANAGER_TYPE: LOCAL
   ENCRYPTOR_TYPE: LOCAL
   DEFAULT_SECRET_MANAGER: LOCAL
   # Enable LOCAL through KMS registry path
@@ -143,7 +143,7 @@ spec:
             runAsUser: 101
       containers:
       - name: ng-manager
-        image: albal/ng-manager:local-env-fix3
+        image: harness/ng-manager-signed:{{ .Values.versions.manager }}
         imagePullPolicy: IfNotPresent
         securityContext:
           runAsUser: 65534
