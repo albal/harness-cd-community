@@ -60,18 +60,17 @@ data:
   WEBHOOK_EVENT_PROCESSING_SERVICE_THREAD_SIZE: '{{ .Values.ng_manager.config.webhook_event_processing_service_thread_size | default "2" }}'
   # Platform service configuration
   PLATFORM_SERVICE_BASE_URL: http://platform-service:9005/
-  # Encryption configuration for LOCAL encryptor
-  HARNESS_SECRET_MANAGER_TYPE: LOCAL
-  HARNESS_ENCRYPTOR_LOCAL_MASTER_KEY: harness-local-master-key-{{ .Values.versions.manager | default "default" }}
-  ENABLE_LOCAL_SECRET_MANAGER: 'true'
-  DEFAULT_SECRET_MANAGER: LOCAL
-  # Additional LOCAL encryption settings
-  LOCAL_ENCRYPTOR_ENABLED: 'true'
-  ENCRYPTOR_TYPE: LOCAL
-  # Secret Manager configuration
-  SECRET_MANAGER_TYPE: LOCAL
-  SECRET_MANAGER_ID: localSecretManager
-  LOCAL_SECRET_MANAGER_ID: localSecretManager
+  # Secret Manager configuration - bypassing LOCAL encryptor bug
+  HARNESS_SECRET_MANAGER_TYPE: VAULT
+  DEFAULT_SECRET_MANAGER: VAULT
+  SECRET_MANAGER_TYPE: VAULT
+  SECRET_MANAGER_ID: harnessSecretManager
+  # Disable problematic LOCAL encryptor
+  ENABLE_LOCAL_SECRET_MANAGER: 'false'
+  LOCAL_ENCRYPTOR_ENABLED: 'false'
+  # Use Harness built-in secret manager instead
+  USE_HARNESS_SECRET_MANAGER: 'true'
+  HARNESS_ENABLE_SECRET_MANAGER: 'true'
 
 ---
 
