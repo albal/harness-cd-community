@@ -119,6 +119,9 @@ data:
   HARNESS_ENCRYPTOR_LOCAL_MASTER_KEY: harness-local-master-key-{{ .Values.versions.manager | default "default" }}
   ENABLE_LOCAL_SECRET_MANAGER: 'true'
   DEFAULT_SECRET_MANAGER: LOCAL
+  # Additional LOCAL encryption settings
+  LOCAL_ENCRYPTOR_ENABLED: 'true'
+  ENCRYPTOR_TYPE: LOCAL
 ---
 
 apiVersion: v1
