@@ -115,8 +115,10 @@ data:
   WATCHER_METADATA_URL: http://proxy/storage/wingswatchers/watcherprod.txt
   WORKFLOW_EXECUTION_MONITOR_ITERATOR_THREAD_COUNT: '2'
   # Encryption configuration for LOCAL encryptor
-  HARNESS_ENCRYPTOR_TYPE: LOCAL
-  HARNESS_LOCAL_ENCRYPTOR_MASTER_KEY: harness-master-key-{{ .Values.versions.manager | default "default" }}
+  ENCRYPTION_TYPE: LOCAL
+  LOCAL_ENCRYPTOR_MASTER_KEY: harness-master-key-{{ .Values.versions.manager | default "default" }}
+  KMS_BASE_URL: http://localhost:8080
+  SECRET_MANAGER_TYPE: LOCAL
 ---
 
 apiVersion: v1
