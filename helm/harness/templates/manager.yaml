@@ -88,7 +88,11 @@ data:
   LICENSE_INFO: trialLicense
   LOGGERS: org.reflections.Reflections=ERROR
   LOGGING_LEVEL: WARN
-  LOG_STREAMING_SERVICE_BASEURL: http://log-service:8079/
+  {{ if .Values.harness_host }}
+  LOG_STREAMING_SERVICE_BASEURL: http://{{ .Values.harness_host }}:{{ .Values.listen_port }}/log-service/
+  {{ else }}
+  LOG_STREAMING_SERVICE_BASEURL: http://proxy/log-service/
+  {{ end }}
   LOG_STREAMING_SERVICE_TOKEN: c76e567a-b341-404d-a8dd-d9738714eb82
   MEMORY: '{{ .Values.manager.config.memory }}'
   NG_MANAGER_BASE_URL: http://proxy/ng/api/

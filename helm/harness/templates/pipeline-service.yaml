@@ -34,7 +34,7 @@ data:
   JAVA_ADVANCED_FLAGS: -XX:-TieredCompilation
   LOCK_CONFIG_REDIS_URL: redis://redis:6379
   LOGGING_LEVEL: WARN
-  LOG_STREAMING_SERVICE_BASEURL: http://log-service:8079/
+  LOG_STREAMING_SERVICE_BASEURL: http://proxy/log-service/
   MANAGER_AUTHORITY: default-authority.harness.io
   MANAGER_BASE_URL: http://proxy/api/
   MANAGER_CLIENT_BASEURL: http://proxy/api/
